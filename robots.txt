@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kareemkassab35-tech.github.io/CyberShield/sitemap.xml
