@@ -1,0 +1,179 @@
+body {
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+    background: url('background.jpg') no-repeat center center/cover;
+}
+
+/* شريط التنقل */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(0,0,0,0.85);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.navbar .logo {
+    font-size: 1.5em;
+    color: #4CAF50;
+    font-weight: bold;
+}
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.navbar ul li a:hover {
+    color: #4CAF50;
+}
+.menu-toggle {
+    display: none;
+    font-size: 1.5em;
+    color: white;
+    cursor: pointer;
+}
+
+/* الرئيسية */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(0,0,0,0.6);
+}
+.profile {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 4px solid #4CAF50;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+.owner {
+    font-size: 1.2em;
+    background: rgba(0,0,0,0.5);
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 8px;
+}
+
+/* الأقسام */
+section {
+    padding: 50px 20px;
+    background: rgba(0,0,0,0.5);
+    margin: 20px 0;
+    text-align: center;
+}
+h2 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.service-box {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    transition: 0.3s;
+}
+.service-box:hover {
+    background: rgba(76, 175, 80, 0.2);
+    transform: scale(1.05);
+}
+.service-box i {
+    margin-bottom: 10px;
+    color: #4CAF50;
+}
+
+/* نموذج التواصل */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: auto;
+}
+input, textarea, button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-family: inherit;
+}
+textarea {
+    height: 100px;
+}
+button {
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s;
+}
+button:hover {
+    background: #45a049;
+}
+
+/* السوشيال ميديا */
+.social {
+    margin-top: 20px;
+}
+.social a {
+    color: white;
+    margin: 0 10px;
+    font-size: 1.5em;
+    transition: 0.3s;
+}
+.social a:hover {
+    color: #4CAF50;
+}
+
+/* الفوتر */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: rgba(0,0,0,0.85);
+    font-size: 0.9em;
+}
+
+/* تأثيرات */
+.fade-in {
+    animation: fadeIn 1.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* تجاوب الجوال */
+@media (max-width: 768px) {
+    .navbar ul {
+        display: none;
+        flex-direction: column;
+        background: rgba(0,0,0,0.95);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 10px;
+    }
+    .navbar ul.active {
+        display: flex;
+    }
+    .menu-toggle {
+        display: block;
+    }
+}
