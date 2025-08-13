@@ -1,179 +1,133 @@
-body {
-    font-family: 'Cairo', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: white;
-    background: url('background.jpg') no-repeat center center/cover;
+/* ========== Base ========= */
+:root{
+  --bg:#0b0f12;
+  --panel:rgba(255,255,255,.06);
+  --panel-weak:rgba(255,255,255,.03);
+  --text:#e8f1eb;
+  --muted:#a7b6ad;
+  --accent:#2ecc71;
+  --accent-2:#20bf6b;
+  --danger:#ff4757;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'Cairo',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 600px at 100% -10%, rgba(46,204,113,.15), transparent 60%),
+    radial-gradient(1000px 500px at 0% 110%, rgba(46,204,113,.12), transparent 55%),
+    linear-gradient(180deg, #0b0f12 0%, #0a0e10 100%);
+  background-attachment: fixed;
 }
 
-/* شريط التنقل */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background: rgba(0,0,0,0.85);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.navbar .logo {
-    font-size: 1.5em;
-    color: #4CAF50;
-    font-weight: bold;
-}
-.navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-.navbar ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.navbar ul li a:hover {
-    color: #4CAF50;
-}
-.menu-toggle {
-    display: none;
-    font-size: 1.5em;
-    color: white;
-    cursor: pointer;
+/* subtle cyber grid overlay */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(transparent 31px, rgba(255,255,255,.06) 32px),
+    linear-gradient(90deg, transparent 31px, rgba(255,255,255,.06) 32px);
+  background-size:32px 32px;
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,.6), rgba(0,0,0,.95));
+  pointer-events:none;
+  z-index:-1;
 }
 
-/* الرئيسية */
-.hero {
-    text-align: center;
-    padding: 60px 20px;
-    background: rgba(0,0,0,0.6);
-}
-.profile {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    border: 4px solid #4CAF50;
-    object-fit: cover;
-    box-shadow: 0 0 20px rgba(0,0,0,0.7);
-}
-.owner {
-    font-size: 1.2em;
-    background: rgba(0,0,0,0.5);
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: 8px;
-}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
 
-/* الأقسام */
-section {
-    padding: 50px 20px;
-    background: rgba(0,0,0,0.5);
-    margin: 20px 0;
-    text-align: center;
+/* ========== Navbar ========= */
+.navbar{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 20px;
+  background:linear-gradient(180deg, rgba(0,0,0,.75), rgba(0,0,0,.35));
+  backdrop-filter: blur(8px);
+  border-bottom:1px solid var(--panel);
 }
-h2 {
-    color: #4CAF50;
-    margin-bottom: 20px;
-    font-size: 2em;
+.brand{display:flex; align-items:center; gap:8px; font-weight:700; letter-spacing:.3px}
+.brand-name{color:var(--text)}
+.brand-mark{filter:drop-shadow(0 0 8px rgba(32,191,107,.4))}
+.menu-toggle{
+  display:none; background:transparent; border:0; color:var(--text); font-size:1.25rem; cursor:pointer
 }
-.services-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-.service-box {
-    background: rgba(255,255,255,0.1);
-    padding: 20px;
-    border-radius: 10px;
-    width: 250px;
-    transition: 0.3s;
-}
-.service-box:hover {
-    background: rgba(76, 175, 80, 0.2);
-    transform: scale(1.05);
-}
-.service-box i {
-    margin-bottom: 10px;
-    color: #4CAF50;
-}
+.nav-links{display:flex; gap:16px; list-style:none; margin:0; padding:0}
+.nav-links a{padding:8px 10px; border-radius:10px; transition:background .2s}
+.nav-links a:hover{background:var(--panel)}
 
-/* نموذج التواصل */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
-    margin: auto;
+/* ========== Hero ========= */
+.hero{
+  text-align:center;
+  padding:80px 20px 70px;
 }
-input, textarea, button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-family: inherit;
+.hero h1{font-size:2.6rem; margin:.2rem 0 1rem; color:var(--accent)}
+.tagline{color:var(--muted); margin:0 auto 8px; max-width:700px}
+.owner{opacity:.9; margin-bottom:20px}
+.cta{
+  display:inline-block; margin-top:12px; padding:12px 22px; border-radius:14px;
+  background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#06230f; font-weight:700;
+  box-shadow:0 10px 24px rgba(46,204,113,.2);
+  transition: transform .15s ease;
 }
-textarea {
-    height: 100px;
-}
-button {
-    background: #4CAF50;
-    color: white;
-    cursor: pointer;
-    font-size: 1em;
-    transition: 0.3s;
-}
-button:hover {
-    background: #45a049;
-}
+.cta:hover{transform:translateY(-1px)}
 
-/* السوشيال ميديا */
-.social {
-    margin-top: 20px;
+/* ========== Sections ========= */
+.section{padding:60px 16px}
+.section h2{font-size:1.8rem; margin:0 0 18px; color:var(--accent)}
+.grid{
+  display:grid; gap:18px;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
 }
-.social a {
-    color: white;
-    margin: 0 10px;
-    font-size: 1.5em;
-    transition: 0.3s;
+.card{
+  background:var(--panel); border:1px solid var(--panel-weak);
+  padding:18px; border-radius:18px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.05);
 }
-.social a:hover {
-    color: #4CAF50;
-}
+.result{margin-top:10px; background:var(--panel-weak); padding:12px; border-radius:12px}
 
-/* الفوتر */
-footer {
-    text-align: center;
-    padding: 15px;
-    background: rgba(0,0,0,0.85);
-    font-size: 0.9em;
-}
+/* meter */
+.meter{display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:10px 0}
+.meter span{display:block; height:10px; border-radius:8px; background:#2b2f33; border:1px solid rgba(255,255,255,.06)}
+.meter span.on{background:linear-gradient(90deg, var(--accent-2), var(--accent)); border-color:transparent}
 
-/* تأثيرات */
-.fade-in {
-    animation: fadeIn 1.5s ease-in-out;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+/* News */
+.news{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+.news li{background:var(--panel); border:1px solid var(--panel-weak); padding:12px; border-radius:12px}
+.news a{color:var(--text)}
+.news a:hover{color:var(--accent)}
 
-/* تجاوب الجوال */
-@media (max-width: 768px) {
-    .navbar ul {
-        display: none;
-        flex-direction: column;
-        background: rgba(0,0,0,0.95);
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 200px;
-        padding: 10px;
-    }
-    .navbar ul.active {
-        display: flex;
-    }
-    .menu-toggle {
-        display: block;
-    }
+/* Contact */
+.contact-form{max-width:640px; margin:12px auto 0; display:grid; gap:10px}
+.contact-form input, .contact-form textarea{
+  background:#101518; color:var(--text); border:1px solid var(--panel);
+  padding:12px 14px; border-radius:12px; outline:none
+}
+.btn{
+  justify-self:start;
+  background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#06230f; font-weight:700;
+  padding:10px 18px; border-radius:12px; border:0; cursor:pointer
+}
+.btn:hover{filter:brightness(1.05)}
+.social{display:flex; gap:12px; justify-content:center; margin-top:14px}
+.social a{font-size:1.4rem; color:var(--muted)}
+.social a:hover{color:var(--accent)}
+
+/* Footer */
+.footer{padding:22px 16px; border-top:1px solid var(--panel); text-align:center; color:var(--muted)}
+
+/* FX */
+.fade-in{animation:fade .9s ease both}
+@keyframes fade{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+
+/* Responsive */
+@media (max-width: 800px){
+  .grid{grid-template-columns:1fr}
+  .menu-toggle{display:block}
+  .nav-links{display:none; position:absolute; right:12px; top:58px; background:#0c1114; border:1px solid var(--panel);
+    padding:10px; border-radius:12px; width:220px; box-shadow:0 10px 24px rgba(0,0,0,.35)}
+  .nav-links.show{display:block}
 }
