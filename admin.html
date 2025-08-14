@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة التحكم — CyberShield</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="brand">
+      <span class="brand-mark">🛡️</span>
+      <span class="brand-name">CyberShield Admin</span>
+    </div>
+    <div class="actions">
+      <a class="btn ghost small" href="index.html">الرجوع للموقع</a>
+      <button id="logoutBtn" class="btn small danger">خروج</button>
+    </div>
+  </nav>
+
+  <main class="admin">
+    <section class="auth" id="authSection">
+      <h2>تسجيل الدخول</h2>
+      <form id="loginForm">
+        <input id="email" type="email" placeholder="البريد الإلكتروني" required />
+        <input id="password" type="password" placeholder="كلمة المرور" required />
+        <button class="btn" type="submit">دخول</button>
+      </form>
+      <p class="muted small">يتم التحقق عبر Firebase Authentication.</p>
+    </section>
+
+    <section id="dashSection" class="hidden">
+      <h2>لوحة التحكم</h2>
+
+      <div class="card">
+        <h3>الإعدادات العامة</h3>
+        <label>اسم الموقع</label>
+        <input id="siteName" type="text" placeholder="CyberShield" />
+
+        <div class="grid-2">
+          <div>
+            <label>عنوان الهيرو (AR)</label>
+            <input id="heroTitle_ar" type="text" />
+            <label>وصف الهيرو (AR)</label>
+            <textarea id="heroTagline_ar" rows="2"></textarea>
+          </div>
+          <div>
+            <label>Hero title (EN)</label>
+            <input id="heroTitle_en" type="text" />
+            <label>Hero tagline (EN)</label>
+            <textarea id="heroTagline_en" rows="2"></textarea>
+          </div>
+        </div>
+
+        <label>رابط خلفية الهيرو (صورة)</label>
+        <input id="heroBgUrl" type="text" placeholder="https://..." />
+        <div class="uploader">
+          <input id="bgFile" type="file" accept="image/*" />
+          <button class="btn" id="uploadBg">رفع الخلفية</button>
+        </div>
+        <button class="btn" id="saveGeneral">حفظ الإعدادات</button>
+      </div>
+
+      <div class="card">
+        <h3>أدوات الموقع</h3>
+        <p class="muted small">يمكنك تعديل الأدوات كقائمة JSON. مثال عنصر أداة:
+        {"id":"ip","title_ar":"معرفة IP","title_en":"IP Lookup","desc_ar":"...","desc_en":"..."}</p>
+        <textarea id="toolsJson" rows="10"></textarea>
+        <button class="btn" id="saveTools">حفظ الأدوات</button>
+      </div>
+
+      <div class="card">
+        <h3>الروابط الاجتماعية</h3>
+        <div class="grid-3">
+          <div><label>Facebook</label><input id="fb" type="url" placeholder="https://facebook.com/..."/></div>
+          <div><label>Twitter / X</label><input id="tw" type="url" placeholder="https://x.com/..."/></div>
+          <div><label>LinkedIn</label><input id="ln" type="url" placeholder="https://linkedin.com/in/..."/></div>
+        </div>
+        <button class="btn" id="saveSocial">حفظ الروابط</button>
+      </div>
+
+      <div class="card">
+        <h3>الأخبار اليدوية (اختياري)</h3>
+        <p class="muted small">يمكنك إضافة أخبار مخصصة بدل RSS. اتركها فارغة لاستخدام RSS تلقائيًا.</p>
+        <textarea id="customNewsJson" rows="8" placeholder='[{"title":"عنوان","link":"https://...","date":"2025-08-14"}]'></textarea>
+        <button class="btn" id="saveNews">حفظ الأخبار</button>
+      </div>
+
+      <div class="card">
+        <h3>أزرار سريعة</h3>
+        <button class="btn ghost" id="publishAll">نشر كل التغييرات</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>© <span id="year"></span> CyberShield Admin</small>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
