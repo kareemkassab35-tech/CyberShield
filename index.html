@@ -1,67 +1,140 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title id="site-title">CyberShield</title>
-
-  <meta name="description" content="CyberShield — موقع أدوات وخدمات الأمن السيبراني." />
-  <meta name="author" content="Kareem El Sayed Tawfek Kassab" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CyberShield V3</title>
+  <link rel="stylesheet" href="assets/style.css"/>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="brand">
-      <span class="brand-mark">🛡️</span>
-      <span class="brand-name" id="brandName">CyberShield</span>
-    </div>
-    <div class="actions">
-      <button id="toggleLang" class="btn small">EN</button>
-      <a class="btn ghost small" href="admin.html" rel="nofollow">لوحة التحكم</a>
-    </div>
-  </nav>
+  <div class="container">
+    <nav class="nav">
+      <div class="brand">
+        <div class="logo" id="siteLogo"></div>
+        <h1 id="siteName">CyberShield</h1>
+      </div>
+      <div class="actions">
+        <a class="btn" href="#tools">الأدوات</a>
+        <a class="btn" href="#articles">المقالات</a>
+        <a class="btn primary" href="admin.html">لوحة التحكم</a>
+      </div>
+    </nav>
 
-  <header class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1 id="heroTitle">CyberShield - Kareem El Sayed Tawfek Kassab</h1>
-      <p id="heroTagline" class="tagline">حلول وأدوات الأمن السيبراني — بسيطة وفعالة.</p>
-      <a href="#tools" class="cta">ابدأ الآن</a>
-    </div>
-  </header>
-
-  <main>
-    <section id="tools" class="section">
-      <h2 id="toolsHeading">أدوات الأمن السيبراني</h2>
-      <div id="toolsGrid" class="grid"></div>
+    <section class="hero">
+      <div class="card">
+        <h2 id="heroTitle">تعلم الأمن السيبراني والبرمجة بسهولة</h2>
+        <p id="heroDesc">دروس وأدوات عملية ومحتوى محدث لحماية أنظمتك وتعزيز مهاراتك.</p>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <a class="btn primary" href="#tools">ابدأ الآن</a>
+          <a class="btn" target="_blank" href="https://owasp.org/">OWASP</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>أخبار الأمن السيبراني</h3>
+        <div id="newsBox" class="grid"></div>
+        <small>يمكنك تعديل الأخبار من لوحة التحكم لاحقاً.</small>
+      </div>
     </section>
 
-    <section id="news" class="section">
-      <h2 id="newsHeading">آخر أخبار الأمن السيبراني</h2>
-      <ul id="newsList" class="news"><li class="muted">جارٍ جلب الأخبار...</li></ul>
-      <p class="muted small">المصدر: The Hacker News (RSS).</p>
-    </section>
+    <h3 class="section-title" id="tools">أدوات CyberShield</h3>
+    <div class="grid tools-grid">
 
-    <section id="contact" class="section">
-      <h2 id="contactHeading">تواصل</h2>
-      <form class="contact-form" onsubmit="event.preventDefault();alert('تم الإرسال (نموذج تجريبي).');">
-        <input type="text" name="name" placeholder="الاسم" required />
-        <input type="email" name="email" placeholder="البريد الإلكتروني" required />
-        <textarea name="message" placeholder="كيف نساعدك؟" rows="5" required></textarea>
-        <button class="btn" type="submit">إرسال</button>
-      </form>
-    </section>
-  </main>
+      <div class="card">
+        <span><b>IP Lookup</b></span>
+        <button class="btn" onclick="getIP()">اعرف عنوان IP والموقع</button>
+        <pre id="ipResult">—</pre>
+      </div>
 
-  <footer class="footer">
-    <small id="footerCopy">© <span id="year"></span> جميع الحقوق محفوظة — CyberShield</small>
-  </footer>
+      <div class="card">
+        <span><b>Password Strength</b></span>
+        <input id="pwd" placeholder="اكتب كلمة المرور"/>
+        <button class="btn" onclick="checkStrength()">افحص القوة</button>
+        <pre id="pwdResult">—</pre>
+      </div>
 
-  <!-- Firebase SDKs via CDN -->
-  <script type="module" src="firebase-config.js"></script>
-  <script type="module" src="app.js"></script>
+      <div class="card">
+        <span><b>Password Generator</b></span>
+        <div class="form-row">
+          <input id="len" type="number" min="8" max="64" value="16"/>
+          <select id="charset">
+            <option value="alnum">حروف + أرقام</option>
+            <option value="all">حروف + أرقام + رموز</option>
+          </select>
+        </div>
+        <button class="btn" onclick="genPass()">توليد</button>
+        <pre id="genResult">—</pre>
+      </div>
+
+      <div class="card">
+        <span><b>Base64 & SHA-256</b></span>
+        <textarea id="txt" rows="3" placeholder="نص للتشفير/فك التشفير/التجزئة"></textarea>
+        <div class="form-row">
+          <button class="btn" onclick="b64encode()">Base64 Encode</button>
+          <button class="btn" onclick="b64decode()">Base64 Decode</button>
+        </div>
+        <button class="btn" onclick="sha256()">SHA-256 Hash</button>
+        <pre id="cryptoOut">—</pre>
+      </div>
+
+      <div class="card">
+        <span><b>JWT Decoder</b></span>
+        <input id="jwt" placeholder="ضع JSON Web Token"/>
+        <button class="btn" onclick="decodeJWT()">فَكّ التوكن</button>
+        <pre id="jwtOut">—</pre>
+      </div>
+
+      <div class="card">
+        <span><b>Regex Tester</b></span>
+        <input id="rePattern" placeholder="نمط Regex"/>
+        <input id="reText" placeholder="نص للاختبار"/>
+        <button class="btn" onclick="testRegex()">اختبر</button>
+        <pre id="reOut">—</pre>
+      </div>
+
+      <div class="card">
+        <span><b>JSON Formatter / Validator</b></span>
+        <textarea id="jsonText" rows="3" placeholder='{"hello":"world"}'></textarea>
+        <button class="btn" onclick="formatJSON()">تنسيق + تحقق</button>
+        <pre id="jsonOut">—</pre>
+      </div>
+
+      <div class="card">
+        <span><b>QR Generator</b></span>
+        <input id="qrText" placeholder="نص/رابط لإنشاء QR"/>
+        <button class="btn" onclick="makeQR()">إنشاء QR</button>
+        <div id="qrOut"></div>
+      </div>
+
+      <div class="card">
+        <span><b>UUID v4 Generator</b></span>
+        <button class="btn" onclick="genUUID()">توليد UUID</button>
+        <pre id="uuidOut">—</pre>
+      </div>
+
+      <div class="card">
+        <span><b>File SHA-256</b></span>
+        <input id="fileHash" type="file"/>
+        <button class="btn" onclick="hashFile()">حسِب التجزئة</button>
+        <pre id="fileHashOut">—</pre>
+      </div>
+
+    </div>
+
+    <h3 class="section-title" id="articles">المقالات</h3>
+    <div id="articlesList" class="grid"></div>
+
+    <h3 class="section-title" id="videos">الفيديوهات</h3>
+    <div id="videosList" class="grid"></div>
+
+    <footer>© <span id="year"></span> CyberShield — تعلم، احمِ، طوّر.</footer>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/cloudinary.js"></script>
+  <script src="js/app-plus.js"></script>
 </body>
 </html>

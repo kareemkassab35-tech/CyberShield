@@ -1,5 +1,5 @@
-// Firebase config (provided by Kareem)
-export const firebaseConfig = {
+
+const firebaseConfig = {
   apiKey: "AIzaSyCBuACSWNacXwiujFeNq2I53A7lG6gaaHg",
   authDomain: "cybershield-89462.firebaseapp.com",
   projectId: "cybershield-89462",
@@ -8,3 +8,6 @@ export const firebaseConfig = {
   appId: "1:616801744711:web:8f5ad3582206da7b6efe62",
   measurementId: "G-8WPECLF1Y1"
 };
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
